@@ -1,0 +1,13 @@
+import streamlit as st
+
+# إعداد شكل الصفحة
+st.set_page_config(page_title="Special Message", page_icon="❤️")
+
+# الرسالة الأساسية
+st.markdown("<h1 style='text-align: center; color: #ff4d6d;'>I MISS YOU</h1>", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: center;'>وحشتني جداً 😍</h3>", unsafe_allow_html=True)
+
+# زرار المفاجأة
+if st.button('Click for a Surprise! 🤩'):
+    st.balloons() 
+    st.markdown("<h2 style='text-align: center;'>❤️ كل سنة وأنت طيب ❤️</h2>", unsafe_allow_html=True)
