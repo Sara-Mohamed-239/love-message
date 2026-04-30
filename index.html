@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مفاجأة لحموكشة</title>
+    <style>
+        body { font-family: 'Arial', sans-serif; text-align: center; background-color: #fff0f5; padding-top: 100px; overflow: hidden; position: relative; min-height: 100vh;}
+        h1 { color: #ff4d6d; font-size: 2.5rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
+        .btn { padding: 15px 40px; font-size: 20px; background-color: #ff4d6d; color: white; border: none; border-radius: 50px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: all 0.3s; }
+        .btn:hover { background-color: #c9184a; transform: scale(1.05); }
+        #message { margin-top: 50px; font-size: 50px; color: #c9184a; display: none; animation: pop 0.5s; font-weight: bold; }
+        @keyframes pop { 0% { transform: scale(0); } 100% { transform: scale(1); } }
+        
+        /* استايل القلوب */
+        .heart { position: absolute; color: #ff85a2; font-size: 20px; top: -20px; user-select: none; animation: fall linear infinite; }
+        @keyframes fall {
+            0% { top: -20px; transform: translateX(0) rotate(0deg); opacity: 1; }
+            20% { transform: translateX(15px) rotate(45deg); }
+            40% { transform: translateX(-15px) rotate(90deg); }
+            60% { transform: translateX(15px) rotate(135deg); }
+            80% { transform: translateX(-15px) rotate(180deg); opacity: 0.8; }
+            100% { top: 100vh; transform: translateX(0) rotate(225deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <h1>مفاجأة يا حموكشة! 🎁</h1>
+    <button id="mainBtn" class="btn" onclick="startSurprise()">دوس هنا بسرعة</button>
+    <div id="message">وحشتني جداً ❤️</div>
+
+    <script>
+        function startSurprise() {
+            // إظهار الرسالة
+            document.getElementById('message').style.display = 'block';
+            // إخفاء الزرار
+            document.getElementById('mainBtn').style.display = 'none';
+            // بدء المطر من القلوب
+            for (let i = 0; i < 50; i++) {
+                setTimeout(createHeart, i * 100);
+            }
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerText = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 2) + 's'; // مدة النزول بين 2 لـ 5 ثواني
+            heart.style.fontSize = (Math.random() * 15 + 15) + 'px'; // حجم عشوائي للقلب
+            document.body.appendChild(heart);
+            
+            // مسح القلب بعد ما ينزل عشان المتصفح ميهنجش
+            setTimeout(() => { heart.remove(); }, 5000);
+        }
+    </script>
+</body>
+</html>
