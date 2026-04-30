@@ -3,55 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مفاجأة لحموكشة</title>
+    <title>مفاجأة التخرج 🎓</title>
     <style>
-        body { font-family: 'Arial', sans-serif; text-align: center; background-color: #fff0f5; padding-top: 100px; overflow: hidden; position: relative; min-height: 100vh;}
-        h1 { color: #ff4d6d; font-size: 2.5rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
-        .btn { padding: 15px 40px; font-size: 20px; background-color: #ff4d6d; color: white; border: none; border-radius: 50px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: all 0.3s; }
-        .btn:hover { background-color: #c9184a; transform: scale(1.05); }
-        #message { margin-top: 50px; font-size: 50px; color: #c9184a; display: none; animation: pop 0.5s; font-weight: bold; }
-        @keyframes pop { 0% { transform: scale(0); } 100% { transform: scale(1); } }
-        
-        /* استايل القلوب */
-        .heart { position: absolute; color: #ff85a2; font-size: 20px; top: -20px; user-select: none; animation: fall linear infinite; }
-        @keyframes fall {
-            0% { top: -20px; transform: translateX(0) rotate(0deg); opacity: 1; }
-            20% { transform: translateX(15px) rotate(45deg); }
-            40% { transform: translateX(-15px) rotate(90deg); }
-            60% { transform: translateX(15px) rotate(135deg); }
-            80% { transform: translateX(-15px) rotate(180deg); opacity: 0.8; }
-            100% { top: 100vh; transform: translateX(0) rotate(225deg); opacity: 0; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        h1 { color: #2c3e50; margin-bottom: 30px; }
+
+        .button-container {
+            display: grid;
+            grid-template-columns: 100px 100px;
+            gap: 20px;
+        }
+
+        button {
+            padding: 15px 25px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+            background-color: #3498db;
+            color: white;
+            transition: transform 0.2s, background-color 0.2s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        button:hover {
+            background-color: #2980b9;
+            transform: scale(1.1);
+        }
+
+        #message-box {
+            margin-top: 40px;
+            padding: 20px;
+            border-radius: 15px;
+            background: white;
+            display: none;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            max-width: 80%;
+            z-index: 10;
+        }
+
+        .congrats {
+            color: #e74c3c;
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+            font-size: 1.2em;
+        }
+
+        /* تأثيرات البلالين والقلوب */
+        .particle {
+            position: absolute;
+            bottom: -50px;
+            font-size: 2rem;
+            animation: float Up 4s linear forwards;
+            pointer-events: none;
+        }
+
+        @keyframes floatUp {
+            to {
+                transform: translateY(-110vh) rotate(360deg);
+                opacity: 0;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>مفاجأة يا حموكشة! 🎁</h1>
-    <button id="mainBtn" class="btn" onclick="startSurprise()">دوس هنا بسرعة</button>
-    <div id="message">وحشتني جداً ❤️</div>
+
+    <h1>يا بشمهندسين.. كل واحد يدوس على اسمه ✨</h1>
+
+    <div class="button-container">
+        <button onclick="showMessage('youssef_eid')">يوسف عيد</button>
+        <button onclick="showMessage('youssef_ezzat')">يوسف عزت</button>
+        <button onclick="showMessage('youssef_mansour')">يوسف منصور</button>
+        <button onclick="showMessage('ziad')">زياد</button>
+    </div>
+
+    <div id="message-box">
+        <h2 id="personal-msg"></h2>
+        <span class="congrats">🎓 مبروك التخرج 🎓</span>
+    </div>
 
     <script>
-        function startSurprise() {
-            // إظهار الرسالة
-            document.getElementById('message').style.display = 'block';
-            // إخفاء الزرار
-            document.getElementById('mainBtn').style.display = 'none';
-            // بدء المطر من القلوب
-            for (let i = 0; i < 50; i++) {
-                setTimeout(createHeart, i * 100);
-            }
+        const data = {
+            youssef_eid: "أحلى هندسة يا.. جوز أختي ❤️",
+            youssef_ezzat: "البشمبرمج العريس وصل يا جدعان 🤵‍♂️",
+            youssef_mansour: "الصديق الصدوق ههه ولع بقا 😂🔥",
+            ziad: "زياد جينتل مان سئيل كلها 😎"
+        };
+
+        function showMessage(id) {
+            const box = document.getElementById('message-box');
+            const text = document.getElementById('personal-msg');
+            
+            text.innerText = data[id];
+            box.style.display = 'block';
+
+            // إطلاق التأثيرات
+            createParticles();
         }
 
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.classList.add('heart');
-            heart.innerText = '❤️';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = (Math.random() * 3 + 2) + 's'; // مدة النزول بين 2 لـ 5 ثواني
-            heart.style.fontSize = (Math.random() * 15 + 15) + 'px'; // حجم عشوائي للقلب
-            document.body.appendChild(heart);
-            
-            // مسح القلب بعد ما ينزل عشان المتصفح ميهنجش
-            setTimeout(() => { heart.remove(); }, 5000);
+        function createParticles() {
+            const emojis = ['🎈', '🎈', '❤️', '💖', '✨', '🎓'];
+            for (let i = 0; i < 40; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                particle.style.delay = Math.random() * 1 + 's';
+                document.body.appendChild(particle);
+
+                // حذف العنصر بعد انتهاء الحركة
+                setTimeout(() => {
+                    particle.remove();
+                }, 4000);
+            }
         }
     </script>
 </body>
